@@ -1,6 +1,7 @@
 class Bob
 
   def hey(phrase = nil)
+    phrase ||= " "
     if is_yelling?(phrase)
       'Woah, chill out!'
     elsif is_question?(phrase)
@@ -8,7 +9,7 @@ class Bob
     elsif is_statement?(phrase)
       'Whatever.'
     elsif is_quiet?(phrase)
-      'Fine. Be that way!'
+      'Fine. Be that way.'
     end
   end
 
@@ -17,7 +18,8 @@ class Bob
   end
 
   def is_yelling?(phrase)
-    phrase.match(/[A-Z\W]{3,}/) ? true : false
+    phrase.match(/[A-Z\W]{3,}/) &&  (phrase == phrase.upcase)
+
   end
 
   def is_statement?(phrase)
