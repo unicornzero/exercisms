@@ -1,29 +1,32 @@
 class Bob
 
-  def hey(phrase = "")
-    phrase = phrase || ""
+  def hey(phrase)
     responder(phrase)
   end
 
   private
     def responder(phrase)
-      input =
-        if phrase.empty? 
-          :quiet
-        elsif phrase.end_with?("?")
-          :question
-        elsif phrase == phrase.upcase
-          :yelling
-        else
-          :statement
-        end
-
-      case input
-        when :question then 'Sure.'  
-        when :statement then 'Whatever.'
-        when :yelling then 'Woah, chill out!'
-        when :quiet then 'Fine. Be that way.'
+      if quiet?(phrase)
+        'Fine. Be that way.'
+      elsif yelling?(phrase)
+        'Woah, chill out!'
+      elsif question?(phrase)
+        'Sure.'  
+      else
+        'Whatever.'
       end
+    end
+
+    def quiet?(phrase)
+      phrase.to_s.empty? 
+    end
+
+    def yelling?(phrase)
+      phrase == phrase.upcase
+    end
+
+    def question?(phrase)
+      phrase.end_with?("?")
     end
 
 end
