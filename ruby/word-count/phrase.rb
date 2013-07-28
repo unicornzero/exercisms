@@ -7,6 +7,6 @@ class Phrase
 
   private
     def count(words)
-
+      @word_count = words.downcase.scan(/\w+/)
     end
 end
