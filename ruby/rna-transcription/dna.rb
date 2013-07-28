@@ -1,11 +1,10 @@
-class DNA
+DNA = Struct.new(:segment) do
 
-  def initialize(string)
-    @string = string
-  end
+  URACIL = "U"
+  THYMINE = "T"
 
   def to_rna
-    @string.to_s.gsub("T", "U")
+    segment.gsub(THYMINE, URACIL)
   end
-  
+
 end
