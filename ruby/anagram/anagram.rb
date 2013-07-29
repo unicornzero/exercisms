@@ -1,9 +1,17 @@
 Anagram = Struct.new(:word) do
 
 	def match(anagrams)
-		anagrams.each_with_object([]) do |candidate|
-		 candidate if candidate.downcase.split.sort == word.downcase.split.sort
+		results = []
+		anagrams.each do |candidate|
+		  if alphasort(candidate) == alphasort(word)
+				results << candidate 
+			end
 		end
+		results
 	end
 
+	private
+		def alphasort(word)
+			word.downcase.split("").sort
+		end
 end

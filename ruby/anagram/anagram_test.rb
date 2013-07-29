@@ -9,7 +9,6 @@ class AnagramTest < MiniTest::Unit::TestCase
   end
 
   def test_detect_simple_anagram
-    skip
     detector = Anagram.new('ba')
     anagrams = detector.match(['ab', 'abc', 'bac'])
     assert_equal ['ab'], anagrams
