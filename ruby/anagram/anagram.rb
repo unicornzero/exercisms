@@ -1,17 +1,19 @@
 Anagram = Struct.new(:word) do
 
   def match(candidates)
-    anagram = Proc.new {|c| alphabetize(c) == sorted_word}
-    candidates.keep_if &anagram
+    candidates.keep_if {|candidate| matches_word?(candidate)}
   end
 
   private
     def alphabetize(word)
-      word.downcase.split("").sort
+      word.downcase.chars.sort
     end
 
     def sorted_word
       @sorted_word ||= alphabetize(word)
     end
 
+    def matches_word?(candidate)
+      alphabetize(candidate) == sorted_word
+    end
 end
