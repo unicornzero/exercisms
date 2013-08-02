@@ -14,38 +14,26 @@ class Beer
   def construct_verse(qty)
     wall = " on the wall"
     down = "down and pass it around,"
-    starter = start_num?(qty) + beers?(qty) + wall + ", " + start_num?(qty) + beers?(qty)
-    middle = ".\nTake " + one?(qty) + down + " " + end_num?(qty)
+    starter = ( zero?(qty) + beers?(qty) + wall + ", " + zero?(qty) + beers?(qty) ).capitalize
+    middle = ".\nTake " + last_one?(qty) + down + " " + zero?(qty-1)
     ender = beers?(qty-1) + wall + ".\n"
-    last_middle = ".\nGo to the store and buy some more, 99"
-
-    if qty > 2
-      starter + middle + ender
-    elsif qty == 2
-      starter + middle + ender
-    elsif qty == 1
-      starter + middle + ender
-    elsif qty == 0
-      starter.capitalize + ".\nGo to the store and buy some more, 99" + ender
-    end
+    starter + ( last_middle?(qty) || middle ) + ender
   end
 
-  def start_num?(number)
-    number == 0 ? "no more" : number.to_s
+  def zero?(qty)
+    qty == 0 ? "no more" : qty.to_s
   end
 
-  def beers?(number)
-    number == 1 ? " bottle of beer" : " bottles of beer"
+  def beers?(qty)
+    qty == 1 ? " bottle of beer" : " bottles of beer"
   end
 
-  def one?(number)
-    number == 1 ? "it " : "one "
+  def last_one?(qty)
+    qty == 1 ? "it " : "one "
   end
 
-  def end_num?(number)
-    number < 2 ? "no more" : (number - 1).to_s
+  def last_middle?(qty)
+    ".\nGo to the store and buy some more, 99" if qty == 0
   end
-
-
 
 end
