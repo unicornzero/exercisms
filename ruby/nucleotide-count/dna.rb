@@ -10,6 +10,7 @@ class DNA
 
 
   def count(nucleotide) 
+    raise ArgumentError unless /[AGTCU]/ =~ nucleotide
     nucleotide_counts[nucleotide] || 0
   end
 
