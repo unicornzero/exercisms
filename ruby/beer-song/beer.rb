@@ -17,6 +17,7 @@ class Beer
     starter = ( zero?(qty) + beers?(qty) + wall + ", " + zero?(qty) + beers?(qty) ).capitalize
     middle = ".\nTake " + last_one?(qty) + down + " " + zero?(qty-1)
     ender = beers?(qty-1) + wall + ".\n"
+    
     starter + ( last_middle?(qty) || middle ) + ender
   end
 
