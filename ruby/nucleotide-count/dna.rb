@@ -1,8 +1,4 @@
 class DNA
-  ADENINE = "A"
-  GUANINE = "G"
-  THYMINE = "T"
-  CYTOSINE = "C"
 
   def initialize(strand)
     @strand = strand
