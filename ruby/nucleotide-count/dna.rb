@@ -1,11 +1,11 @@
 class DNA
-  def initialize(nucleic_acid)
-    @nucleic_acid = nucleic_acid
+  def initialize(strand)
+    @strand = strand
   end
 
   def count(nucleotide)
     validate_nucleotide(nucleotide)
-    @nucleic_acid.scan(/#{nucleotide}/).length
+    @strand.count(nucleotide)
   end
 
   def nucleotide_counts
