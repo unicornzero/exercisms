@@ -9,7 +9,7 @@ class DNA
   end
 
   def nucleotide_counts
-    dna_nucleotides.each_with_object({}) {|n, h| h[n] = count(n) || 0 }
+    dna_nucleotides.each_with_object({}) {|n, h| h[n] = count(n) }
   end
 
   private
