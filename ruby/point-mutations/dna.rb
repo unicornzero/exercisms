@@ -5,11 +5,18 @@ class DNA
   end
 
   def hamming_distance(strand2)
-    mismatches = 0
-    0.upto(min_strand_length(strand2) - 1) do |i|
-      mismatches += 1 unless @strand1[i] == strand2[i]
+    mutations(strand2).count
+  end
+
+private
+  def mutations(strand2)
+    comparison_index(strand2).find_all do |i|
+      @strand1[i] != strand2[i]
     end
-    mismatches
+  end
+
+  def comparison_index(strand2)
+    (0..(min_strand_length(strand2) -1)).to_a
   end
 
   def min_strand_length(strand2)
