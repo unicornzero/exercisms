@@ -1,10 +1,19 @@
-# Anagram
+# Difference Of Squares
 
-Write a program that, given a word and a list of possible anagrams, selects the correct sublist.
+Find the difference between the sum of the squares and the square of the sums of the first N natural numbers.
 
-Given `"listen"` and a list of candidates like `"enlists" "google"
-"inlets" "banana"` the program should return a list containing
-`"inlets"`.
+The square of the sum of the first ten natural numbers is,
+
+    (1 + 2 + ... + 10)**2 = 55**2 = 3025
+
+The sum of the squares of the first ten natural numbers is,
+
+    1**2 + 2**2 + ... + 10**2 = 385
+
+Hence the difference between the square of the sum of the first
+ten natural numbers and the sum of the squares is 2640:
+
+    3025 - 385 = 2640
 
 * * * *
 
@@ -38,4 +47,4 @@ run it like this:
 
 ## Source
 
-Inspired by the Extreme Startup game [view source](https://github.com/rchatley/extreme_startup)
+Problem 6 at Project Euler [view source](http://projecteuler.net/problem=6)

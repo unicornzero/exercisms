@@ -1,10 +1,70 @@
-# Beer Song
+#!/usr/bin/env ruby
+gem 'minitest', '>= 5.0.0'
+require 'minitest/autorun'
+require_relative 'beer_song'
 
-Write a program which produces the lyrics to that beloved classic, that field-trip favorite: 99 Bottles of Beer on the Wall.
+# rubocop:disable Metrics/LineLength
+class BeerSongTest < Minitest::Test
+  def test_the_first_verse
+    expected = "99 bottles of beer on the wall, 99 bottles of beer.\n" \
+      "Take one down and pass it around, 98 bottles of beer on the wall.\n"
+    assert_equal expected, BeerSong.new.verse(99)
+  end
 
-Note that not all verses are identical.
+  def test_another_verse
+    skip
+    expected = "3 bottles of beer on the wall, 3 bottles of beer.\n" \
+      "Take one down and pass it around, 2 bottles of beer on the wall.\n"
+    assert_equal expected, BeerSong.new.verse(3)
+  end
 
-```plain
+  def test_verse_2
+    skip
+    expected = "2 bottles of beer on the wall, 2 bottles of beer.\n" \
+      "Take one down and pass it around, 1 bottle of beer on the wall.\n"
+    assert_equal expected, BeerSong.new.verse(2)
+  end
+
+  def test_verse_1
+    skip
+    expected = "1 bottle of beer on the wall, 1 bottle of beer.\n" \
+      "Take it down and pass it around, no more bottles of beer on the wall.\n"
+    assert_equal expected, BeerSong.new.verse(1)
+  end
+
+  def test_verse_0
+    skip
+    expected = "No more bottles of beer on the wall, no more bottles of beer.\n" \
+      "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
+    assert_equal expected, BeerSong.new.verse(0)
+  end
+
+  def test_a_couple_verses
+    skip
+    expected = "99 bottles of beer on the wall, 99 bottles of beer.\n" \
+      "Take one down and pass it around, 98 bottles of beer on the wall.\n" \
+      "\n" \
+      "98 bottles of beer on the wall, 98 bottles of beer.\n" \
+      "Take one down and pass it around, 97 bottles of beer on the wall.\n"
+    assert_equal expected, BeerSong.new.verses(99, 98)
+  end
+
+  def test_a_few_verses
+    skip
+    expected = "2 bottles of beer on the wall, 2 bottles of beer.\n" \
+      "Take one down and pass it around, 1 bottle of beer on the wall.\n" \
+      "\n" \
+      "1 bottle of beer on the wall, 1 bottle of beer.\n" \
+      "Take it down and pass it around, no more bottles of beer on the wall.\n" \
+      "\n" \
+      "No more bottles of beer on the wall, no more bottles of beer.\n" \
+      "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
+    assert_equal expected, BeerSong.new.verses(2, 0)
+  end
+
+  def test_the_whole_song # rubocop:disable Metrics/MethodLength
+    skip
+    expected = <<-SONG
 99 bottles of beer on the wall, 99 bottles of beer.
 Take one down and pass it around, 98 bottles of beer on the wall.
 
@@ -304,52 +364,18 @@ Take it down and pass it around, no more bottles of beer on the wall.
 
 No more bottles of beer on the wall, no more bottles of beer.
 Go to the store and buy some more, 99 bottles of beer on the wall.
-```
+    SONG
+    assert_equal expected, BeerSong.new.lyrics
+  end
 
-## For bonus points
-
-Did you get the tests passing and the code clean? If you want to, these
-are some additional things you could try:
-
-* Remove as much duplication as you possibly can.
-* Optimize for readability, even if it means introducing duplication.
-* If you've removed all the duplication, do you have a lot of
-  conditionals? Try replacing the conditionals with polymorphism, if it
-  applies in this language. How readable is it?
-
-Then please share your thoughts in a comment on the submission. Did this
-experiment make the code better? Worse? Did you learn anything from it?
-
-* * * *
-
-For installation and learning resources, refer to the
-[exercism help page](http://exercism.io/languages/ruby).
-
-For running the tests provided, you will need the Minitest gem. Open a
-terminal window and run the following command to install minitest:
-
-    gem install minitest
-
-If you would like color output, you can `require 'minitest/pride'` in
-the test file, or note the alternative instruction, below, for running
-the test file.
-
-In order to run the test, you can run the test file from the exercise
-directory. For example, if the test suite is called
-`hello_world_test.rb`, you can run the following command:
-
-    ruby hello_world_test.rb
-
-To include color from the command line:
-
-    ruby -rminitest/pride hello_world_test.rb
-
-The test files may have the execution bit set so you may also be able to
-run it like this:
-
-    ./hello_world_test.rb
-
-
-## Source
-
-Learn to Program by Chris Pine [view source](http://pine.fm/LearnToProgram/?Chapter=06)
+  # Problems in exercism evolve over time,
+  # as we find better ways to ask questions.
+  # The version number refers to the version of the problem you solved,
+  # not your solution.
+  #
+  # Define a constant named VERSION inside of BeerSong.
+  def test_bookkeeping
+    skip
+    assert_equal 2, BeerSong::VERSION
+  end
+end

@@ -1,10 +1,21 @@
-# Anagram
+# Meetup
 
-Write a program that, given a word and a list of possible anagrams, selects the correct sublist.
+Calculate the date of meetups.
 
-Given `"listen"` and a list of candidates like `"enlists" "google"
-"inlets" "banana"` the program should return a list containing
-`"inlets"`.
+Typically meetups happen on the same day of the week.
+
+Examples are
+
+- the first Monday
+- the third Tuesday
+- the Wednesteenth
+- the last Thursday
+
+Note that "Monteenth", "Tuesteenth", etc are all made up words. There
+was a meetup whose members realised that there are exactly 7 days that
+end in '-teenth'. Therefore, one is guaranteed that each day of the week
+(Monday, Tuesday, ...) will have exactly one date that is named with '-teenth'
+in every month.
 
 * * * *
 
@@ -38,4 +49,4 @@ run it like this:
 
 ## Source
 
-Inspired by the Extreme Startup game [view source](https://github.com/rchatley/extreme_startup)
+Jeremy Hinegardner mentioned a Boulder meetup that happens on the Wednesteenth of every month [view source](https://twitter.com/copiousfreetime)

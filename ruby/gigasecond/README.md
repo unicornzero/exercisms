@@ -1,10 +1,8 @@
-# Anagram
+# Gigasecond
 
-Write a program that, given a word and a list of possible anagrams, selects the correct sublist.
+Write a program that will calculate the date that someone turned or will celebrate their 1 Gs anniversary.
 
-Given `"listen"` and a list of candidates like `"enlists" "google"
-"inlets" "banana"` the program should return a list containing
-`"inlets"`.
+A gigasecond is one billion (10**9) seconds.
 
 * * * *
 
@@ -38,4 +36,4 @@ run it like this:
 
 ## Source
 
-Inspired by the Extreme Startup game [view source](https://github.com/rchatley/extreme_startup)
+Chapter 9 in Chris Pine's online Learn to Program tutorial. [view source](http://pine.fm/LearnToProgram/?Chapter=09)
