@@ -3,10 +3,10 @@ var Bob = function() {};
 Bob.prototype = {
   
   shouting: function(words) {
-    if (words == words.toLowerCase()) {
+    if (words === words.toLowerCase()) {
       return false
     } else {
-      return words == words.toUpperCase();
+      return words === words.toUpperCase();
     };
   },
   
@@ -18,17 +18,15 @@ Bob.prototype = {
   silent: function(words) {
     var emptiness = /^\s*$/;
     var silence = words.match(emptiness);
-    if (silence) { return true; };
+    return !!silence;
   },
   
   hey: function(words) {
     if (this.shouting(words)) {
       return 'Whoa, chill out!';
-    };
-    if (this.questioning(words)) {
+    } else if (this.questioning(words)) {
       return 'Sure.';
-    };
-    if (this.silent(words)) {
+    } else if (this.silent(words)) {
       return 'Fine. Be that way!';
     };
     return 'Whatever.';
