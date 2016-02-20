@@ -1,36 +1,33 @@
 var Bob = function() {};
 
-Bob.prototype = {
-  
-  shouting: function(words) {
+Bob.prototype.hey = function(words) {
+  if (_shouting(words)) {
+    return 'Whoa, chill out!';
+  } if (_questioning(words)) {
+    return 'Sure.';
+  } if (_silent(words)) {
+    return 'Fine. Be that way!';
+  };
+  return 'Whatever.';
+
+  function _shouting(words) {
     if (words === words.toLowerCase()) {
       return false
     } else {
       return words === words.toUpperCase();
     };
-  },
+  };
   
-  questioning: function(words) {
-    var last_char = words.charAt(words.length - 1);
-    return last_char == '?'
-  },
+  function _questioning(words) {
+    var lastChar = words.charAt(words.length - 1);
+    return lastChar == '?'
+  };
   
-  silent: function(words) {
+  function _silent(words) {
     var emptiness = /^\s*$/;
-    var silence = words.match(emptiness);
+    var silence = emptiness.test(words);
     return !!silence;
-  },
-  
-  hey: function(words) {
-    if (this.shouting(words)) {
-      return 'Whoa, chill out!';
-    } else if (this.questioning(words)) {
-      return 'Sure.';
-    } else if (this.silent(words)) {
-      return 'Fine. Be that way!';
-    };
-    return 'Whatever.';
-  }
+  };
 };
 
 module.exports = Bob;
