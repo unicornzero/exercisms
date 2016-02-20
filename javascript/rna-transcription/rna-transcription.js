@@ -1,7 +1,14 @@
-var DnaTranscriber = function() {};
+function DnaTranscriber() {}
 
-DnaTranscriber.prototype = {
-  _translateNucleotide: function(nucleotide) {
+DnaTranscriber.prototype.toRna = function(dnaStrand) {
+  var rnaStrand = '';
+  for (index in dnaStrand) {
+    var nucleotide = dnaStrand.charAt(index);
+    rnaStrand += _translateNucleotide(nucleotide);
+  }
+  return rnaStrand;
+
+  function _translateNucleotide(nucleotide) {
     var nucleotideComplements = {
       'G': 'C',
       'C': 'G',
@@ -9,16 +16,7 @@ DnaTranscriber.prototype = {
       'A': 'U'
     };
     return nucleotideComplements[nucleotide];
-  },
-
-  toRna: function(dnaStrand) {
-    var rnaStrand = '';
-    for (index in dnaStrand) {
-      var nucleotide = dnaStrand.charAt(index);
-      rnaStrand += this._translateNucleotide(nucleotide);
-    }
-    return rnaStrand;
-  }
+  };
 };
 
 module.exports = DnaTranscriber;
