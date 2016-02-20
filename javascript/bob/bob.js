@@ -11,22 +11,15 @@ Bob.prototype.hey = function(words) {
   return 'Whatever.';
 
   function _shouting(words) {
-    if (words === words.toLowerCase()) {
-      return false
-    } else {
-      return words === words.toUpperCase();
-    };
+    return (words !== words.toLowerCase() && words === words.toUpperCase());
   };
   
   function _questioning(words) {
-    var lastChar = words.charAt(words.length - 1);
-    return lastChar == '?'
+    return words.charAt(words.length - 1) == '?';
   };
   
   function _silent(words) {
-    var emptiness = /^\s*$/;
-    var silence = emptiness.test(words);
-    return !!silence;
+    return /^\s*$/.test(words);
   };
 };
 
