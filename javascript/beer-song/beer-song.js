@@ -1,9 +1,9 @@
 var BeerSong = function() {};
 
-BeerSong.prototype.sing = function(startNum, endVerse) {
+BeerSong.prototype.sing = function(startVerse, endVerse) {
   var song = '';
   var endNum = endVerse || 0;
-  for (num = startNum; num >= endNum; num--) {
+  for (num = startVerse; num >= endNum; num--) {
     song += this.verse(num);
     num !== endNum ? song += '\n' : null;
   };
@@ -11,33 +11,33 @@ BeerSong.prototype.sing = function(startNum, endVerse) {
 };
 
 BeerSong.prototype.verse = function(num) {
+  var verseText = `${_countingPhrase(num)}`;
   if (num == 0) {
-    var verseText = _verseZero(num)
-  } else if (num == 1) {
-    var verseText = _verseOne(num)
-  } else if (num == 2) {
-    var verseText = _verseTwo(num)
+    verseText += `Go to the store and buy some more, ${_onTheWall(_remainder(99))}.\n`;
   } else {
-    var verseText = _middleVerse(num)
+    verseText += `Take ${num === 1 ? "it" : "one"} down and pass it around, ${_onTheWall(_remainder(num - 1).toLowerCase())}.\n`;
   }
   return verseText;
 
-  function _middleVerse(num) {
-    return `${num} bottles of beer on the wall, ${num} bottles of beer.\nTake one down and pass it around, ${num - 1} bottles of beer on the wall.\n`;
+  function _countingPhrase(num) {
+    var remainder = _remainder(num);
+    return `${_onTheWall(remainder)}, ${remainder.toLowerCase()} of beer.\n`
+
   };
 
-  function _verseTwo(num) {
-    return `${num} bottles of beer on the wall, ${num} bottles of beer.\nTake one down and pass it around, ${num - 1} bottle of beer on the wall.\n`;
-  };
+  function _onTheWall(num) {
+    return `${num} of beer on the wall`
+  }
 
-  function _verseOne(num) {
-    return `${num} bottle of beer on the wall, ${num} bottle of beer.\nTake it down and pass it around, no more bottles of beer on the wall.\n`;
+  function _remainder(num) {
+    if (num == 0) {
+      return `No more bottles`;
+    } else if (num == 1) {
+      return `${num} bottle`;
+    } else {
+      return `${num} bottles`;
+    }
   };
-
-  function _verseZero(num) {
-    return `No more bottles of beer on the wall, no more bottles of beer.\nGo to the store and buy some more, 99 bottles of beer on the wall.\n`;
-  };
-
 };
 
 module.exports = BeerSong;
