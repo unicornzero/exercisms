@@ -11,19 +11,25 @@ BeerSong.prototype.sing = function(startVerse, endVerse) {
 };
 
 BeerSong.prototype.verse = function(verseNum) {
-  var verseText = `${_beerOnWall(verseNum)}, ${_pluralizeBottle(verseNum == 0 ? 'No more' : verseNum).toLowerCase()} of beer.\n`;
+  var verseText = `${_bottles(_count(verseNum))} on the wall, `;
+  verseText += `${_bottles(_count(verseNum)).toLowerCase()}.\n`;
   if (verseNum == 0) {
-    return verseText += `Go to the store and buy some more, ${_beerOnWall(99)}.\n`;
+    return verseText += `Go to the store and buy some more, ${_bottlesOnWall(99)}.\n`;
   } else {
-    return verseText += `Take ${verseNum === 1 ? "it" : "one"} down and pass it around, ${_beerOnWall(verseNum - 1).toLowerCase()}.\n`;
+    verseText += `Take ${verseNum === 1 ? "it" : "one"} down and pass it around, `;
+    return verseText += `${_bottlesOnWall(verseNum - 1).toLowerCase()}.\n`;
   }
 
-  function _beerOnWall(verseNum) { 
-    return `${_pluralizeBottle(verseNum == 0 ? 'No more' : verseNum)} of beer on the wall`;
+  function _count(qty) {
+    return qty == 0 ? 'No more' : qty;
   };
 
-  function _pluralizeBottle(qty) {
-    return qty == 1 ? `${qty} bottle` : `${qty} bottles`;
+  function _bottlesOnWall(qty) {
+    return `${_bottles(_count(qty))} on the wall`;
+  };
+
+  function _bottles(qty) {
+    return qty == 1 ? `${qty} bottle of beer` : `${qty} bottles of beer`;
   };
 };
 
