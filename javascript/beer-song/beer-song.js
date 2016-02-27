@@ -11,13 +11,13 @@ BeerSong.prototype.sing = function(startVerse, endVerse) {
 };
 
 BeerSong.prototype.verse = function(verseNum) {
-  var verseText = `${_bottles(_count(verseNum))} on the wall, `;
-  verseText += `${_bottles(_count(verseNum)).toLowerCase()}.\n`;
+  var verse = `${_bottlesOnWall(verseNum)}, `;
+  verse += `${_bottles(verseNum).toLowerCase()}.\n`;
   if (verseNum == 0) {
-    return verseText += `Go to the store and buy some more, ${_bottlesOnWall(99)}.\n`;
+    return verse += `Go to the store and buy some more, ${_bottlesOnWall(99)}.\n`;
   } else {
-    verseText += `Take ${verseNum === 1 ? "it" : "one"} down and pass it around, `;
-    return verseText += `${_bottlesOnWall(verseNum - 1).toLowerCase()}.\n`;
+    verse += `Take ${verseNum === 1 ? "it" : "one"} down and pass it around, `;
+    return verse += `${_bottlesOnWall(verseNum - 1).toLowerCase()}.\n`;
   }
 
   function _count(qty) {
@@ -29,7 +29,7 @@ BeerSong.prototype.verse = function(verseNum) {
   };
 
   function _bottles(qty) {
-    return qty == 1 ? `${qty} bottle of beer` : `${qty} bottles of beer`;
+    return qty == 1 ? `${_count(qty)} bottle of beer` : `${_count(qty)} bottles of beer`;
   };
 };
 
