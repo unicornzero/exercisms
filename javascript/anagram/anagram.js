@@ -1,24 +1,19 @@
 var Anagram = function(baseWord) {
-  this.baseWord = baseWord;
 
   this.matches = function(words) {
     var words = Array.isArray(words) ? words : Array.prototype.slice.call(arguments);
-    var matches = [];
-    for (index in words) {
-      _match(words[index]) ? matches.push(words[index]) : null;
-    }
-    return matches;
+    return words.filter((word) => { return _match(word);  });
 
     function _match(newWord) {
-      if (baseWord.toLowerCase() === newWord.toLowerCase()) {
-        return false;
-      } else {
-        return _sortLetters(baseWord) === _sortLetters(newWord);
-      }
+      return !_sameWord(newWord) && _sortLetters(baseWord) === _sortLetters(newWord);
     };
 
     function _sortLetters(word) {
       return word.toLowerCase().split('').sort().join('');
+    };
+
+    function _sameWord(newWord) {
+      return baseWord.toLowerCase() === newWord.toLowerCase();
     };
   };
 };
