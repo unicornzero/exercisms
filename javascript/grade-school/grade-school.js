@@ -13,9 +13,7 @@ var School = function() {
   };
 
   this.grade = function(gradeNumber) {
-    return this._roster[gradeNumber]
-            ? this._roster[gradeNumber]
-            : [];
+    return this._roster[gradeNumber] || [];
   }
 };
 
