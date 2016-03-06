@@ -1,17 +1,10 @@
-function Year(year) {
-  this.year = year;
-};
+var Year = function(year) {
 
-Year.prototype.isLeap = function () {
-  function _divisibleBy(dividend, divisor) {
-    return dividend % divisor == 0;
-  };
-  
-  var year = this.year;
-  if (_divisibleBy(year, 400)) {
-    return true
-  } else {
-    return _divisibleBy(year, 4) && !_divisibleBy(year, 100);
+  this.isLeap = function () {
+    function _yearDivisibleBy(divisor) {
+      return year % divisor == 0;
+    };
+    return _yearDivisibleBy(400) || _yearDivisibleBy(4) && !_yearDivisibleBy(100);
   };
 };
 
