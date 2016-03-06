@@ -6,10 +6,9 @@ var School = function() {
   };
 
   this.add = function(studentName, gradeNumber) {
-    this._roster[gradeNumber] 
-      ? this._roster[gradeNumber].push(studentName)
-      : this._roster[gradeNumber] = [studentName];
-    this._roster[gradeNumber] = this._roster[gradeNumber].sort();
+    this._roster[gradeNumber] = (this._roster[gradeNumber] || [])
+      .concat(studentName)
+      .sort();
   };
 
   this.grade = function(gradeNumber) {
