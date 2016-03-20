@@ -3,23 +3,16 @@ var Anagram = function(baseWord) {
 };
 
 Anagram.prototype.matches = function(words) {
-  var baseWord = this.baseWord;
+  var sortLetters = (string) => {
+    return string.toLowerCase().split('').sort().join('');
+  };
+
   if (!Array.isArray(words)) {
     words = Array.prototype.slice.call(arguments);
   }
-  return words.filter(word => isMatch(word));
-
-  function isMatch(newWord) {
-    return !isSameWord(newWord) && sortLetters(baseWord) === sortLetters(newWord);
-  }
-
-  function sortLetters(word) {
-    return word.toLowerCase().split('').sort().join('');
-  }
-
-  function isSameWord(newWord) {
-    return baseWord.toLowerCase() === newWord.toLowerCase();
-  }
+  return words.filter(word => 
+    this.baseWord.toLowerCase() !== word.toLowerCase() 
+    && sortLetters(this.baseWord) === sortLetters(word));
 };
 
 module.exports = Anagram;
