@@ -1,62 +1,48 @@
-var Clock = function() {};
-
-Clock.at = function(hours, minutes) {
+var Clock = function(hours, minutes) {
   this.hours = hours;
   this.minutes = minutes;
-
-  var normalizeTime = function() {
-    minutes = this.minutes;
-    hours = this.hours;
-    // console.log('hours ', hours, ' and minutes', minutes)
-
-    if (minutes < 0 || minutes >= 60) {
-      hours += Math.floor(minutes/60);
-      minutes = minutes < 0 ? 60 + minutes % 60 : minutes % 60;
+  this._normalizeTime = function() {
+    if (this.minutes < 0 || this.minutes >= 60) {
+      this.hours += Math.floor(this.minutes/60);
+      this.minutes = this.minutes < 0 ? 60 + this.minutes % 60 : this.minutes % 60;
     }
-    // console.log('hours ', hours, ' and minutes', minutes)
-
-    if (hours < 0 || (hours >= 24)) {
-      hours = hours < 24 ? 24 + hours % 24 : hours % 24;
-      //case is -48 hours
-      hours = hours < 0 ? 24 + hours % 24 : hours % 24;
+    while (this.hours < 0 || this.hours >= 24) {
+      this.hours = this.hours >= 24 ? this.hours % 24 : 24 + this.hours % 24;
     }
-    // console.log('hours ', hours, ' and minutes', minutes)
-
-    this.hours = hours;
-    this.minutes = minutes;
   }
-  // console.log('hours ', hours, ' and minutes', minutes)
-  this.toString = function() {
-    normalizeTime();
-    var _leftPad = function(num) {
-      if (num > 9) {
-        return String(num);
-      } else if (num > 0 && num <=9) {
-        return '0' + num;
-      } else {
-        return '00';
-      }
-    };
-    return _leftPad(this.hours) + ':' + _leftPad(this.minutes)
-  }
-  this.plus = function(minutes) {
-    this.minutes += minutes;
-    return this;
-  };
+  this._normalizeTime();
+};
 
-  this.minus = function(minutes) {
-    this.minutes -= minutes;
-    return this;
+Clock.prototype.toString = function() {
+  this._normalizeTime();
+  var _leftPad = function(num) {
+    if (num > 9) {
+      return String(num);
+    } else if (num > 0 && num <=9) {
+      return '0' + num;
+    } else {
+      return '00';
+    }
   };
+  return _leftPad(this.hours) + ':' + _leftPad(this.minutes)
+};
 
-  this.equals = function(otherClock) {
-    console.log(this.minutes);
-    console.log(otherClock.minutes);
-    return this.hours == otherClock.hours && this.minutes == otherClock.minutes;
-  };
-
+Clock.prototype.plus = function(minutes) {
+  this.minutes += minutes;
   return this;
-}
+};
 
+Clock.prototype.minus = function(minutes) {
+  this.minutes -= minutes;
+  return this;
+};
+
+Clock.prototype.equals = function(otherClock) {
+  return this.toString() == otherClock.toString();
+};
+
+Clock.at = function(hours, minutes) {
+  return new Clock(hours, minutes);
+}
 
 module.exports = Clock;
