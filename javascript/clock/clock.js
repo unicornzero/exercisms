@@ -1,6 +1,9 @@
-var Clock = function() {};
+var Clock = function() {
+};
 
 Clock.at = function(hours, minutes) {
+  this.hours = hours;
+  this.minutes = minutes;
   var maxValues = {'minutes': 60, 'hours': 24}
 
   var _leftPad = function(num) {
@@ -13,34 +16,20 @@ Clock.at = function(hours, minutes) {
     }
   };
 
-  // handle negative hours
-  while (hours < 0) {
-    hours = 24 + hours;
-  }
-
-  // handle negative minutes
-  while (minutes < 0) {
-    console.log(hours, 'and', minutes);
-    hours -= 1;
-    minutes = 60 + minutes;
-  }
-  // handle negative hours
-  while (hours < 0) {
-    hours = 24 + hours;
-  }
-  // roll-over minutes
-  if (minutes >= 60) {
+  if (minutes < 0 || minutes >= 60) {
     hours += Math.floor(minutes/60);
-    minutes = minutes % 60;
+    minutes = minutes < 0 ? 60 + minutes % 60 : minutes % 60;
   }
 
-  // roll-over hours
-  if (hours >= 24) {
-    hours = hours % 24;
+  if (hours < 0 || (hours >= 24)) {
+    hours = hours < 0 ? 24 + hours % 24 : hours % 24;
   }
 
-  var timeString = _leftPad(hours) + ':' + _leftPad(minutes);
-  return timeString;
+  // console.log('hours ', hours, ' and minutes', minutes)
+  this.toString = function() {return _leftPad(hours) + ':' + _leftPad(minutes)}
+  this.plus = function() {return this};
+  return this;
 }
+
 
 module.exports = Clock;
