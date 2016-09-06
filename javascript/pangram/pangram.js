@@ -3,11 +3,9 @@ var Pangram = function (phrase) {
 
   this.isPangram = function () {
     var alphabet = "abcdefghijklmnopqrstuvwxyz";
-    for (i = 0; i <= this.phrase.length; i++) {
-      var char = this.phrase.charAt(i).toLowerCase();
-      if (alphabet.includes(char)) {
-        alphabet = alphabet.replace(char, '');
-      }
+    for (var index in phrase) {
+      var letter = this.phrase[index].toLowerCase();
+      alphabet = alphabet.replace(letter, '');
     };
     return alphabet.length === 0;
   };
