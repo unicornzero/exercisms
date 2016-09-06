@@ -2,17 +2,16 @@ var ETL = function() {
   this.transform = function(oldScoring) {
     scores = Object.keys(oldScoring);
     this.newScoring = {};
-    for (var p = 0; p < scores.length; p++) {
-      var score = scores[p];
+    for (var index in scores) {
+      var score = scores[index];
       var letters = oldScoring[score];
-      for (var l = 0; l < letters.length; l++) {
-        var letter = letters[l].toLowerCase();
+      for (var index in letters) {
+        var letter = letters[index].toLowerCase();
         this.newScoring[letter] = Number(score);
       }
     }
     return this.newScoring;
   };
 };
-
 
 module.exports = ETL;
