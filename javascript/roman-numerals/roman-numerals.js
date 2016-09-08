@@ -6,37 +6,38 @@ function toRoman(num) {
     }
     return string;
   }
-  
-  var numerals = [
-    [1000, 'M'],
-    [500, 'D'],
-    [100, 'C'],
-    [50, 'L'],
-    [10, 'X'],
-    [5, 'V'],
-    [1, 'I']
-  ];
 
   var convertNum = function(num) {
+    var numerals = [
+      [1000, 'M'],
+      [500, 'D'],
+      [100, 'C'],
+      [50, 'L'],
+      [10, 'X'],
+      [5, 'V'],
+      [1, 'I']
+    ];
     var translated = '';
     var remainder = num;
     for (var i in numerals) {
-      var curSet = numerals[i]
-      var curNum = curSet[0];
-      var curLetter = curSet[1];
+      var curNum = numerals[i][0];
+      var curLetter = numerals[i][1];
       if (remainder >= curNum) {
-        var multiple = Math.floor(remainder / curNum);
-        translated += repeat(curLetter, remainder/curNum);
-        remainder -= curNum * multiple;
-      } else if (remainder > 0 && remainder >= curNum - 1) {
-        translated += 'I' + curLetter;
-        remainder -= (curNum + 1);
-      } else if (remainder > 10 && remainder >= curNum - 10) {
-        translated += 'X' + curLetter;
-        remainder -= (curNum - 10);
-      } else if (remainder > 100 && remainder >= curNum - 100) {
-        translated += 'C' + curLetter;
-        remainder -= (curNum - 100);
+        translated += repeat(curLetter, remainder / curNum);
+        remainder -= curNum * Math.floor(remainder / curNum);
+      }
+      var subtractables = [
+        [100, 'C'],
+        [10, 'X'],
+        [1, 'I']
+      ];
+      for (var i in subtractables) {
+        var subNumber = subtractables[i][0];
+        var subLetter = subtractables[i][1];
+        if (remainder >= subNumber && remainder >= curNum - subNumber) {
+          translated += subLetter + curLetter;
+          remainder -= (curNum - subNumber);
+        }
       }
     }
     return translated;
